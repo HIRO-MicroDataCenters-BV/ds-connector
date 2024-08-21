@@ -1,13 +1,14 @@
 openapi: 3.1.0
 info:
-  title: Template web service
-  description: This is a template of a web service
+  title: Data Space Connector service
+  description: This connector requests data from the data layer and provides a REST
+    API for servicing requests from the catalog service.
   contact:
     name: HIRO-MicroDataCenters
     email: all-hiro@hiro-microdatacenters.nl
   license:
     name: MIT
-    url: https://github.com/HIRO-MicroDataCenters-BV/template-python/blob/main/LICENSE
+    url: https://github.com/HIRO-MicroDataCenters-BV/ds-connector/blob/main/LICENSE
   version: 0.1.0
 paths:
   /metrics:

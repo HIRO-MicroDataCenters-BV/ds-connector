@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Template web service
+    Data Space Connector service
 
-    This is a template of a web service
+    This connector requests data from the data layer and provides a REST API for servicing requests from the catalog service.
 
     The version of the OpenAPI document: 0.1.0
     Contact: all-hiro@hiro-microdatacenters.nl
