@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   ds-connector:
   - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-08-21T11:38:16.23104789Z"
+    description: Data Space Connector service
+    digest: c59f0b0b85242c18794990095397f4927ea11e178fafb8eb00d1886223649a4c
+    name: ds-connector
+    type: application
+    urls:
+    - https://HIRO-MicroDataCenters-BV.github.io/ds-connector/helm-charts/ds-connector-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
     appVersion: 0.1.0-dev.3.main.f18b8abb
     created: "2024-08-21T11:35:56.618397622Z"
     description: Data Space Connector service
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://HIRO-MicroDataCenters-BV.github.io/ds-connector/helm-charts/ds-connector-0.1.0-dev.2.main.7770d556.tgz
     version: 0.1.0-dev.2.main.7770d556
-generated: "2024-08-21T11:35:56.61796834Z"
+generated: "2024-08-21T11:38:16.230018526Z"
