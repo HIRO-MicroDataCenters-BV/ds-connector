@@ -30,8 +30,9 @@ pyyaml = "^6.0.1"
 types-pyyaml = "^6.0.12.12"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.4"
-pytest-mock = "^3.12.0"
+pytest-asyncio = "^0.24"
+pytest = "^8.3"
+pytest-mock = "^3.14"
 httpx = "^0.26"
 tox = "^4.13.0"
 
@@ -97,3 +98,6 @@ addopts = [
   "--doctest-modules",
   "--doctest-continue-on-failure",
 ]
+
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

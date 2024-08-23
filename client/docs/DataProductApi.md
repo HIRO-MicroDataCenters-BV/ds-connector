@@ -1,26 +1,26 @@
-# ds_connector.DefaultApi
+# ds_connector.DataProductApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**health_check**](DefaultApi.md#health_check) | **GET** /health-check/ | Health check
-[**metrics_metrics_get**](DefaultApi.md#metrics_metrics_get) | **GET** /metrics | Metrics
+[**get_data_product**](DataProductApi.md#get_data_product) | **GET** /data-products/{connector_id}/{data_product_id}/ | Get a data product details
+[**get_data_products**](DataProductApi.md#get_data_products) | **GET** /data-products/ | Get a list of data products
 
 
-# **health_check**
-> HealthCheck health_check()
+# **get_data_product**
+> DataProduct get_data_product(connector_id, data_product_id)
 
-Health check
+Get a data product details
 
-Returns a 200 status code if the service is up and running
+Returns an information about the data product
 
 ### Example
 
 
 ```python
 import ds_connector
-from ds_connector.models.health_check import HealthCheck
+from ds_connector.models.data_product import DataProduct
 from ds_connector.rest import ApiException
 from pprint import pprint
 
@@ -34,26 +34,32 @@ configuration = ds_connector.Configuration(
 # Enter a context with an instance of the API client
 with ds_connector.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ds_connector.DefaultApi(api_client)
+    api_instance = ds_connector.DataProductApi(api_client)
+    connector_id = 'connector_id_example' # str | 
+    data_product_id = 'data_product_id_example' # str | 
 
     try:
-        # Health check
-        api_response = api_instance.health_check()
-        print("The response of DefaultApi->health_check:\n")
+        # Get a data product details
+        api_response = api_instance.get_data_product(connector_id, data_product_id)
+        print("The response of DataProductApi->get_data_product:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DefaultApi->health_check: %s\n" % e)
+        print("Exception when calling DataProductApi->get_data_product: %s\n" % e)
 ```
 
 
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connector_id** | **str**|  | 
+ **data_product_id** | **str**|  | 
 
 ### Return type
 
-[**HealthCheck**](HealthCheck.md)
+[**DataProduct**](DataProduct.md)
 
 ### Authorization
 
@@ -69,21 +75,23 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **metrics_metrics_get**
-> object metrics_metrics_get()
+# **get_data_products**
+> PaginatedResult get_data_products(page=page, page_size=page_size)
 
-Metrics
+Get a list of data products
 
-Endpoint that serves Prometheus metrics.
+Returns a list of data products with the ability to paginate
 
 ### Example
 
 
 ```python
 import ds_connector
+from ds_connector.models.paginated_result import PaginatedResult
 from ds_connector.rest import ApiException
 from pprint import pprint
 
@@ -97,26 +105,32 @@ configuration = ds_connector.Configuration(
 # Enter a context with an instance of the API client
 with ds_connector.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ds_connector.DefaultApi(api_client)
+    api_instance = ds_connector.DataProductApi(api_client)
+    page = 1 # int |  (optional) (default to 1)
+    page_size = 100 # int |  (optional) (default to 100)
 
     try:
-        # Metrics
-        api_response = api_instance.metrics_metrics_get()
-        print("The response of DefaultApi->metrics_metrics_get:\n")
+        # Get a list of data products
+        api_response = api_instance.get_data_products(page=page, page_size=page_size)
+        print("The response of DataProductApi->get_data_products:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DefaultApi->metrics_metrics_get: %s\n" % e)
+        print("Exception when calling DataProductApi->get_data_products: %s\n" % e)
 ```
 
 
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int**|  | [optional] [default to 1]
+ **page_size** | **int**|  | [optional] [default to 100]
 
 ### Return type
 
-**object**
+[**PaginatedResult**](PaginatedResult.md)
 
 ### Authorization
 
@@ -132,6 +146,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

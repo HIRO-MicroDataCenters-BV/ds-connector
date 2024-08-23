@@ -105,15 +105,17 @@ configuration = ds_connector.Configuration(
 # Enter a context with an instance of the API client
 with ds_connector.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ds_connector.DefaultApi(api_client)
+    api_instance = ds_connector.DataProductApi(api_client)
+    connector_id = 'connector_id_example' # str | 
+    data_product_id = 'data_product_id_example' # str | 
 
     try:
-        # Example endpoint
-        api_response = api_instance.example_get()
-        print("The response of DefaultApi->example_get:\n")
+        # Get a data product details
+        api_response = api_instance.get_data_product(connector_id, data_product_id)
+        print("The response of DataProductApi->get_data_product:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling DefaultApi->example_get: %s\n" % e)
+        print("Exception when calling DataProductApi->get_data_product: %s\n" % e)
 
 ```
 
@@ -123,20 +125,22 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**example_get**](docs/DefaultApi.md#example_get) | **GET** / | Example endpoint
+*DataProductApi* | [**get_data_product**](docs/DataProductApi.md#get_data_product) | **GET** /data-products/{connector_id}/{data_product_id}/ | Get a data product details
+*DataProductApi* | [**get_data_products**](docs/DataProductApi.md#get_data_products) | **GET** /data-products/ | Get a list of data products
+*DefaultApi* | [**health_check**](docs/DefaultApi.md#health_check) | **GET** /health-check/ | Health check
 *DefaultApi* | [**metrics_metrics_get**](docs/DefaultApi.md#metrics_metrics_get) | **GET** /metrics | Metrics
-*ItemsApi* | [**items_create**](docs/ItemsApi.md#items_create) | **POST** /item/ | Create an item
-*ItemsApi* | [**items_delete_item**](docs/ItemsApi.md#items_delete_item) | **DELETE** /item/{id}/ | Delete an item
-*ItemsApi* | [**items_read_all**](docs/ItemsApi.md#items_read_all) | **GET** /item/ | Read all items
-*ItemsApi* | [**items_read_item**](docs/ItemsApi.md#items_read_item) | **GET** /item/{id}/ | Read an item
-*ItemsApi* | [**items_update_item**](docs/ItemsApi.md#items_update_item) | **PUT** /item/{id}/ | Update an item
 
 
 ## Documentation For Models
 
- - [ExampleResponse](docs/ExampleResponse.md)
+ - [Connector](docs/Connector.md)
+ - [DataProduct](docs/DataProduct.md)
  - [HTTPValidationError](docs/HTTPValidationError.md)
- - [Item](docs/Item.md)
+ - [HealthCheck](docs/HealthCheck.md)
+ - [Interface](docs/Interface.md)
+ - [PaginatedResult](docs/PaginatedResult.md)
+ - [Source](docs/Source.md)
+ - [Tag](docs/Tag.md)
  - [ValidationError](docs/ValidationError.md)
  - [ValidationErrorLocInner](docs/ValidationErrorLocInner.md)
 

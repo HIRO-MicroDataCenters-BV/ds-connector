@@ -18,8 +18,8 @@
 __version__ = "1.0.0"
 
 # import apis into sdk package
+from ds_connector.api.data_product_api import DataProductApi
 from ds_connector.api.default_api import DefaultApi
-from ds_connector.api.items_api import ItemsApi
 
 # import ApiClient
 from ds_connector.api_response import ApiResponse
@@ -33,8 +33,13 @@ from ds_connector.exceptions import ApiAttributeError
 from ds_connector.exceptions import ApiException
 
 # import models into sdk package
-from ds_connector.models.example_response import ExampleResponse
+from ds_connector.models.connector import Connector
+from ds_connector.models.data_product import DataProduct
 from ds_connector.models.http_validation_error import HTTPValidationError
-from ds_connector.models.item import Item
+from ds_connector.models.health_check import HealthCheck
+from ds_connector.models.interface import Interface
+from ds_connector.models.paginated_result import PaginatedResult
+from ds_connector.models.source import Source
+from ds_connector.models.tag import Tag
 from ds_connector.models.validation_error import ValidationError
 from ds_connector.models.validation_error_loc_inner import ValidationErrorLocInner

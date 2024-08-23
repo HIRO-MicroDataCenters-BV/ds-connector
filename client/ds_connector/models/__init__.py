@@ -15,8 +15,13 @@
 
 
 # import models into model package
-from ds_connector.models.example_response import ExampleResponse
+from ds_connector.models.connector import Connector
+from ds_connector.models.data_product import DataProduct
 from ds_connector.models.http_validation_error import HTTPValidationError
-from ds_connector.models.item import Item
+from ds_connector.models.health_check import HealthCheck
+from ds_connector.models.interface import Interface
+from ds_connector.models.paginated_result import PaginatedResult
+from ds_connector.models.source import Source
+from ds_connector.models.tag import Tag
 from ds_connector.models.validation_error import ValidationError
 from ds_connector.models.validation_error_loc_inner import ValidationErrorLocInner
