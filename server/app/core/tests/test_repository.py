@@ -6,7 +6,7 @@ from .fabrics import create_connector, create_dataproduct, create_manager, creat
 
 class TestRepository:
     @pytest.mark.asyncio
-    async def test_list(self):
+    async def test_list(self) -> None:
         items = [
             create_dataproduct(id="dataproduct1"),
             create_dataproduct(id="dataproduct2"),
@@ -22,7 +22,7 @@ class TestRepository:
         assert set([item.id for item in result]) == set([item.id for item in items])
 
     @pytest.mark.asyncio
-    async def test_get(self):
+    async def test_get(self) -> None:
         data_product = create_dataproduct()
         connector = create_connector(data_products=[data_product])
         manager = create_manager([connector])
@@ -34,7 +34,7 @@ class TestRepository:
 
 class TestGlobalRepository:
     @pytest.mark.asyncio
-    async def test_common(self):
+    async def test_common(self) -> None:
         items = [
             create_dataproduct(id="dataproduct1"),
             create_dataproduct(id="dataproduct2"),

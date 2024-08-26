@@ -6,13 +6,13 @@ from .fabrics import create_connector
 
 
 class TestConnectorsManager:
-    def test_connectors_list(self):
+    def test_connectors_list(self) -> None:
         connector = create_connector()
         manager = ConnectorsManager()
         manager.register(connector)
         assert manager.connectors == [connector]
 
-    def test_get_connector(self):
+    def test_get_connector(self) -> None:
         connector = create_connector()
         manager = ConnectorsManager()
         manager.register(connector)
@@ -21,7 +21,7 @@ class TestConnectorsManager:
 
         assert result == connector
 
-    def test_register(self):
+    def test_register(self) -> None:
         manager = ConnectorsManager()
 
         assert len(manager.connectors) == 0
@@ -32,7 +32,7 @@ class TestConnectorsManager:
         assert len(manager.connectors) == 1
         assert manager.connectors[0] == connector
 
-    def test_register_if_connector_already_exists(self):
+    def test_register_if_connector_already_exists(self) -> None:
         connector = create_connector()
         manager = ConnectorsManager()
         manager.register(connector)
@@ -40,7 +40,7 @@ class TestConnectorsManager:
         with pytest.raises(ConnectorAlreadyExists):
             manager.register(connector)
 
-    def test_unregister(self):
+    def test_unregister(self) -> None:
         connector = create_connector()
         manager = ConnectorsManager()
         manager.register(connector)
@@ -51,7 +51,7 @@ class TestConnectorsManager:
 
         assert len(manager.connectors) == 0
 
-    def test_register_if_connector_not_found(self):
+    def test_register_if_connector_not_found(self) -> None:
         connector = create_connector()
         manager = ConnectorsManager()
 

@@ -2,7 +2,7 @@ from ..entities import Connector, DataProduct, Interface, Tag
 
 
 class TestDataProduct:
-    def test_common(self):
+    def test_common(self) -> None:
         data_product = DataProduct(
             id="dataproduct1",
             name="cancer_2020",
