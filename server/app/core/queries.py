@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 
 
 class IQuery(ABC):
+    """Interface for implementing repository queries"""
+
     @abstractmethod
     def build(self) -> dict:
         ...

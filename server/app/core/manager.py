@@ -3,6 +3,8 @@ from .exceptions import ConnectorAlreadyExists, ConnectorNotFound
 
 
 class ConnectorsManager:
+    """Class for managing connectors"""
+
     _connectors: dict[str, IConnector]
 
     def __init__(self):

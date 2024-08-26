@@ -109,6 +109,8 @@ components:
         id:
           type: string
           title: Id
+          examples:
+          - connector1
       type: object
       required:
       - id
@@ -187,6 +189,8 @@ components:
         status:
           type: string
           title: Status
+          examples:
+          - OK
       type: object
       required:
       - status
@@ -196,6 +200,8 @@ components:
         id:
           type: string
           title: Id
+          examples:
+          - interface1
       type: object
       required:
       - id
@@ -205,9 +211,13 @@ components:
         page:
           type: integer
           title: Page
+          examples:
+          - 1
         size:
           type: integer
           title: Size
+          examples:
+          - 100
         items:
           items:
             $ref: '#/components/schemas/DataProduct'
@@ -224,6 +234,8 @@ components:
         text:
           type: string
           title: Text
+          examples:
+          - tag1
       type: object
       required:
       - text

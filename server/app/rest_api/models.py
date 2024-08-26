@@ -8,19 +8,19 @@ from app.core.entities import DataProduct as DataProductEntity
 
 
 class HealthCheck(BaseModel):
-    status: str
+    status: str = Field(examples=["OK"])
 
 
 class Tag(BaseModel):
-    text: str
+    text: str = Field(examples=["tag1"])
 
 
 class Connector(BaseModel):
-    id: str
+    id: str = Field(examples=["connector1"])
 
 
 class Interface(BaseModel):
-    id: str
+    id: str = Field(examples=["interface1"])
 
 
 class DataProduct(BaseModel):
@@ -70,6 +70,6 @@ class DataProduct(BaseModel):
 
 
 class PaginatedResult(BaseModel):
-    page: int
-    size: int
+    page: int = Field(examples=[1])
+    size: int = Field(examples=[100])
     items: list[DataProduct]
