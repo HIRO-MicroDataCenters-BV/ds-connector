@@ -1,5 +1,6 @@
 services:
-  web:
+  ds-connector:
     build: .
+    image: hiro-microdatacenters-bv/ds-connector:latest
     ports:
       - "8000:80"
