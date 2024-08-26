@@ -1,10 +1,12 @@
+from typing import Any
+
 from ..connectors import IConnector
 from ..entities import Connector, DataProduct, Interface, Tag
 from ..manager import ConnectorsManager
 from ..queries import IQuery
 
 
-def create_dataproduct(**kwargs) -> DataProduct:
+def create_dataproduct(**kwargs: Any) -> DataProduct:
     data = {
         "id": "dataproduct1",
         "name": "cancer_2020",
@@ -26,7 +28,7 @@ def create_dataproduct(**kwargs) -> DataProduct:
     return DataProduct(**data)  # type: ignore
 
 
-def create_query(result_dict: dict | None = None) -> IQuery:
+def create_query(result_dict: dict[str, Any] | None = None) -> IQuery:
     class FakeQuery(IQuery):
         def build(self):
             return result_dict if result_dict is not None else {}
@@ -35,16 +37,16 @@ def create_query(result_dict: dict | None = None) -> IQuery:
 
 
 def create_connector(
-    id="test_connector_id",
+    id: str = "test_connector_id",
     data_products: list[DataProduct] | None = None,
 ) -> IConnector:
     items = [] if data_products is None else data_products
 
     class FakeConnector(IConnector):
-        async def list(self, *args, **kwargs) -> list[DataProduct]:
+        async def list(self, query: IQuery | None = None) -> list[DataProduct]:
             return items
 
-        async def get(self, *args, **kwargs) -> DataProduct:
+        async def get(self, query: IQuery | None = None) -> DataProduct:
             return items[0]
 
     return FakeConnector(id=id)

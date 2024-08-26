@@ -1,4 +1,5 @@
 from ..entities import Connector, DataProduct, Interface, Tag
+from ..queries import IQuery
 from .interface import IConnector
 
 DUMMY_DATA = [
@@ -57,8 +58,8 @@ DUMMY_DATA = [
 
 
 class DummyConnector(IConnector):
-    async def list(self, *args, **kwargs) -> list[DataProduct]:
+    async def list(self, query: IQuery | None = None) -> list[DataProduct]:
         return DUMMY_DATA
 
-    async def get(self, *args, **kwargs) -> DataProduct:
+    async def get(self, query: IQuery | None = None) -> DataProduct:
         return DUMMY_DATA[0]

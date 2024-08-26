@@ -1,1 +1,3 @@
-from .interface import IConnector  # noqa
+from .interface import IConnector
+
+__all__ = ["IConnector"]
