@@ -17,7 +17,7 @@ class CustomFastAPI(FastAPI):
             return self.openapi_schema
         openapi_schema = get_openapi(
             title="Data Space Connector service",
-            version="0.1.0",
+            version="0.1.1",
             description="This connector requests data from the data layer and "
             "provides a REST API for servicing requests from the catalog "
             "service.",
