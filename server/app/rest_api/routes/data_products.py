@@ -1,3 +1,5 @@
+from typing import Any, Callable
+
 from enum import Enum
 
 from classy_fastapi import Routable, get
@@ -12,7 +14,16 @@ from ..strings import CONNECTOR_NOT_FOUND, DATA_PRODUCT_NOT_FOUND
 TAGS: list[str | Enum] = ["Data product"]
 
 
+UseCasesType = dict[str, Callable[..., Any]]
+
+
 class DataProductRoutes(Routable):
+    _usecases: UseCasesType
+
+    def __init__(self, usecases: UseCasesType) -> None:
+        self._usecases = usecases
+        super().__init__()
+
     @get(
         "/data-products/",
         operation_id="get_data_products",
@@ -27,7 +38,7 @@ class DataProductRoutes(Routable):
     ) -> PaginatedResult:
         """Returns a list of data products with the ability to paginate"""
         query = queries.GetPaginated(page=page, size=pageSize)
-        data_products = await usecases.get_data_products_list(query)
+        data_products = await self._usecases["list"](query)
         items = [DataProduct.from_entity(item) for item in data_products]
         return PaginatedResult(page=page, size=pageSize, items=items)
 
@@ -45,7 +56,7 @@ class DataProductRoutes(Routable):
     ) -> DataProduct:
         """Returns an information about the data product"""
         try:
-            data_product = await usecases.get_data_product(
+            data_product = await self._usecases["get"](
                 connector_id, queries.GetByID(data_product_id)
             )
         except ConnectorNotFound:
@@ -55,4 +66,9 @@ class DataProductRoutes(Routable):
         return DataProduct.from_entity(data_product)
 
 
-routes = DataProductRoutes()
+routes = DataProductRoutes(
+    usecases={
+        "list": usecases.get_data_products_list,
+        "get": usecases.get_data_product,
+    }
+)
