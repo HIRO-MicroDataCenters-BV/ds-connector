@@ -1,11 +1,10 @@
-from typing import Any, Callable
-
+from abc import ABC, abstractmethod
 from enum import Enum
 
 from classy_fastapi import Routable, get
 from fastapi import HTTPException
 
-from app.core import queries, usecases
+from app.core import entities, queries, usecases
 from app.core.exceptions import ConnectorNotFound, DataProductNotFound
 
 from ..models import DataProduct, PaginatedResult
@@ -14,13 +13,38 @@ from ..strings import CONNECTOR_NOT_FOUND, DATA_PRODUCT_NOT_FOUND
 TAGS: list[str | Enum] = ["Data product"]
 
 
-UseCasesType = dict[str, Callable[..., Any]]
+class IDataProductUsecases(ABC):
+    @abstractmethod
+    async def list(
+        self,
+        query: queries.IQuery | None = None,
+    ) -> list[entities.DataProduct]:
+        ...
+
+    @abstractmethod
+    async def get(
+        self, connector_id: str, query: queries.IQuery | None = None
+    ) -> entities.DataProduct:
+        ...
+
+
+class DataProductUsecases(IDataProductUsecases):
+    async def list(
+        self,
+        query: queries.IQuery | None = None,
+    ) -> list[entities.DataProduct]:
+        return await usecases.get_data_products_list(query)
+
+    async def get(
+        self, connector_id: str, query: queries.IQuery | None = None
+    ) -> entities.DataProduct:
+        return await usecases.get_data_product(connector_id, query)
 
 
 class DataProductRoutes(Routable):
-    _usecases: UseCasesType
+    _usecases: IDataProductUsecases
 
-    def __init__(self, usecases: UseCasesType) -> None:
+    def __init__(self, usecases: IDataProductUsecases) -> None:
         self._usecases = usecases
         super().__init__()
 
@@ -38,7 +62,7 @@ class DataProductRoutes(Routable):
     ) -> PaginatedResult:
         """Returns a list of data products with the ability to paginate"""
         query = queries.GetPaginated(page=page, size=pageSize)
-        data_products = await self._usecases["list"](query)
+        data_products = await self._usecases.list(query)
         items = [DataProduct.from_entity(item) for item in data_products]
         return PaginatedResult(page=page, size=pageSize, items=items)
 
@@ -56,7 +80,7 @@ class DataProductRoutes(Routable):
     ) -> DataProduct:
         """Returns an information about the data product"""
         try:
-            data_product = await self._usecases["get"](
+            data_product = await self._usecases.get(
                 connector_id, queries.GetByID(data_product_id)
             )
         except ConnectorNotFound:
@@ -66,9 +90,4 @@ class DataProductRoutes(Routable):
         return DataProduct.from_entity(data_product)
 
 
-routes = DataProductRoutes(
-    usecases={
-        "list": usecases.get_data_products_list,
-        "get": usecases.get_data_product,
-    }
-)
+routes = DataProductRoutes(usecases=DataProductUsecases())
